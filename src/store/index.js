@@ -29,4 +29,4 @@ export {
   useUsersStore,
   useSearchHistoryStore,
 };
-export { selectCartCount, clampQuantity } from "./cart-store";
+export { selectCartCount, selectProductQuantity, clampQuantity, lineIdOf } from "./cart-store";

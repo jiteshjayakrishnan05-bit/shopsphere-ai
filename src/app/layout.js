@@ -2,6 +2,7 @@ import "./globals.css";
 import { AppProviders } from "@/providers/app-providers";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { CompareBar } from "@/features/compare/compare-bar";
 import { APP_NAME, APP_TAGLINE } from "@/lib/constants";
 
 export const metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
           <SiteHeader />
           <main id="main">{children}</main>
           <SiteFooter />
+          <CompareBar />
         </AppProviders>
       </body>
     </html>

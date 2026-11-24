@@ -1,0 +1,12 @@
+{
+  "_comment": "DEMO FIXTURE. DummyJSON has no variant data, so these option sets are local demo data. An option is shown as unavailable when (productId + optionIndex) % unavailableModulo === 0. This is a documented demo rule, not real inventory.",
+  "unavailableModulo": 7,
+  "categories": {
+    "mens-shirts": { "label": "Size", "options": ["S", "M", "L", "XL"] },
+    "tops": { "label": "Size", "options": ["S", "M", "L", "XL"] },
+    "womens-dresses": { "label": "Size", "options": ["S", "M", "L", "XL"] },
+    "mens-shoes": { "label": "Size", "options": ["UK 7", "UK 8", "UK 9", "UK 10"] },
+    "womens-shoes": { "label": "Size", "options": ["UK 4", "UK 5", "UK 6", "UK 7"] },
+    "sunglasses": { "label": "Colour", "options": ["Black", "Tortoise", "Blue"] }
+  }
+}
