@@ -30,6 +30,12 @@ export const SORT_OPTIONS = Object.freeze([
   { value: "newest", label: "Newest" },
 ]);
 
+// Cart pricing rules (demo values, INR). Centralised so totals are computed in one place.
+export const SHIPPING_FLAT = 99;
+export const FREE_SHIPPING_THRESHOLD = 999; // free shipping when subtotal after discount reaches this
+export const TAX_RATE = 0.18; // simulated GST, added on top of the discounted subtotal
+export const LOW_STOCK_THRESHOLD = 5;
+
 export const ROLES = Object.freeze({ CUSTOMER: "customer", ADMIN: "admin" });
 
 export const STORAGE_KEYS = Object.freeze({
