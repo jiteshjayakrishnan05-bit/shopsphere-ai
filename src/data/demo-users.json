@@ -1,0 +1,18 @@
+[
+  {
+    "id": "demo-customer",
+    "name": "Demo Customer",
+    "email": "customer@shopsphere.dev",
+    "phone": "9876543210",
+    "role": "customer",
+    "passwordHash": "09af16fc21bdc207bd3b66c31ee5523a3cfb58d7abf9bf8ed25c8a32ed573999"
+  },
+  {
+    "id": "demo-admin",
+    "name": "Demo Admin",
+    "email": "admin@shopsphere.dev",
+    "phone": "9123456780",
+    "role": "admin",
+    "passwordHash": "39622134645df4475eddc23322bdb5383542b41a0ac29a0117749df2856e0ed9"
+  }
+]

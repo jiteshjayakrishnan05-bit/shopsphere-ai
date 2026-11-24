@@ -19,6 +19,17 @@ export const PAGE_SIZE = 24;
 export const SEARCH_DEBOUNCE_MS = 350;
 export const MAX_SEARCH_QUERY_LENGTH = 100;
 
+export const SESSION_TTL_MS = 2 * 60 * 60 * 1000; // mock session lasts 2 hours
+export const POPULAR_SEARCHES = ["smartphone", "laptop", "headphones", "sunglasses", "fragrance", "watch"];
+
+export const SORT_OPTIONS = Object.freeze([
+  { value: "relevance", label: "Relevance" },
+  { value: "price-asc", label: "Price: Low to High" },
+  { value: "price-desc", label: "Price: High to Low" },
+  { value: "rating", label: "Highest rated" },
+  { value: "newest", label: "Newest" },
+]);
+
 export const ROLES = Object.freeze({ CUSTOMER: "customer", ADMIN: "admin" });
 
 export const STORAGE_KEYS = Object.freeze({
@@ -28,4 +39,6 @@ export const STORAGE_KEYS = Object.freeze({
   checkout: "shopsphere-checkout",
   recentlyViewed: "shopsphere-recently-viewed",
   compare: "shopsphere-compare",
+  users: "shopsphere-users",
+  searchHistory: "shopsphere-search-history",
 });

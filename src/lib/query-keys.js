@@ -8,6 +8,7 @@ export const queryKeys = {
     list: (params = {}) => ["products", "list", params],
     detail: (id) => ["products", "detail", String(id)],
     search: (query, params = {}) => ["products", "search", query, params],
+    catalogue: (source) => ["products", "catalogue", source],
     byCategory: (category, params = {}) => ["products", "category", category, params],
   },
   categories: { all: ["categories"] },

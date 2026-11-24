@@ -1,16 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { persistedStores } from "@/store";
+
+const allHydrated = () => persistedStores.every((s) => s.persist.hasHydrated());
 
 /**
- * True once persisted stores have been rehydrated on the client.
- * Use it to avoid rendering localStorage-derived UI (cart count, wishlist hearts)
- * during the first render, which prevents hydration mismatches.
+ * True once every persisted store has been rehydrated from localStorage on the client.
+ * Use it before rendering localStorage-derived UI (cart count, session) so the first
+ * client render matches the server HTML (no hydration mismatch).
  */
 export function useHydrated() {
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
-    setHydrated(true);
+    const update = () => setHydrated(allHydrated());
+    update();
+    const unsubscribers = persistedStores.map((s) => s.persist.onFinishHydration(update));
+    return () => unsubscribers.forEach((off) => off());
   }, []);
   return hydrated;
 }
