@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FeaturedProducts } from "@/features/products/featured-products";
 import { APP_TAGLINE } from "@/lib/constants";
 
@@ -9,9 +10,11 @@ export default function HomePage() {
           {APP_TAGLINE}
         </h1>
         <p className="mt-3 text-ink-soft">
-          Foundation build: the live product feed below runs through the API client, TanStack Query and the product
-          normaliser.
+          Browse the full catalogue, search with live suggestions, and filter by price, rating and brand.
         </p>
+        <Link href="/products" className="mt-5 inline-block rounded-md bg-brand-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-700">
+          Shop all products
+        </Link>
       </section>
       <section aria-labelledby="featured-heading" className="mt-10">
         <h2 id="featured-heading" className="mb-4 text-xl font-semibold">

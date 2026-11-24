@@ -19,3 +19,9 @@ export async function fetchProductsByCategory(category, { limit = PAGE_SIZE, ski
     await apiGet(`/products/category/${encodeURIComponent(category)}`, { params: { limit, skip }, signal }),
   );
 }
+
+/** DummyJSON returns everything when limit=0. The catalogue filters client-side because the API cannot filter by price, rating or brand. */
+export const fetchAllProducts = ({ signal } = {}) => fetchProducts({ limit: 0, signal });
+export const searchAllProducts = (query, { signal } = {}) => searchProducts(query, { limit: 0, signal });
+export const fetchAllProductsByCategory = (category, { signal } = {}) =>
+  fetchProductsByCategory(category, { limit: 0, signal });
