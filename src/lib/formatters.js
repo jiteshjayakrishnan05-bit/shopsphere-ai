@@ -57,3 +57,11 @@ export function formatCategory(slug) {
     .map((w) => w[0].toUpperCase() + w.slice(1))
     .join(" ");
 }
+
+/** "24 Nov 2026, 3:30 pm" in the viewer's timezone. */
+export const formatDateTime = (iso) =>
+  new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" }).format(new Date(iso));
+
+/** "Thu, 27 Nov" */
+export const formatShortDate = (d) =>
+  new Intl.DateTimeFormat("en-IN", { weekday: "short", day: "numeric", month: "short" }).format(d instanceof Date ? d : new Date(d));

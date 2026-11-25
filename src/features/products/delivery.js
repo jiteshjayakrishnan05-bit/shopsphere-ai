@@ -4,6 +4,9 @@
  */
 const METRO_PREFIXES = new Set(["11", "40", "56", "60", "70", "50", "41", "38"]);
 
+/** Calendar date `n` days after `from` (time of day dropped). */
+export const addDays = (from, n) => new Date(from.getFullYear(), from.getMonth(), from.getDate() + n);
+
 /** @returns {{valid: false} | {valid: true, minDays: number, maxDays: number, minDate: Date, maxDate: Date, zone: "metro"|"standard"|"remote"}} */
 export function estimateDelivery(pincode, from = new Date()) {
   const pin = String(pincode ?? "").trim();
@@ -20,8 +23,7 @@ export function estimateDelivery(pincode, from = new Date()) {
     minDays = 5;
     maxDays = 8;
   }
-  const addDays = (n) => new Date(from.getFullYear(), from.getMonth(), from.getDate() + n);
-  return { valid: true, minDays, maxDays, minDate: addDays(minDays), maxDate: addDays(maxDays), zone };
+  return { valid: true, minDays, maxDays, minDate: addDays(from, minDays), maxDate: addDays(from, maxDays), zone };
 }
 
 export const formatDeliveryDate = (d) =>
