@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, WifiOff } from "lucide-react";
@@ -12,8 +11,8 @@ import { CartLine } from "./cart-line";
 import { OrderSummary } from "./order-summary";
 import { useCartSync } from "./use-cart-sync";
 import { evaluateCoupon } from "./coupons";
-import { calculateTotals } from "./pricing";
-import { canCheckout as checkCanCheckout, isPayable } from "./cart-reconcile";
+import { useCartPricing } from "./use-cart-pricing";
+import { canCheckout as checkCanCheckout } from "./cart-reconcile";
 import { useHydrated } from "@/hooks/use-hydrated";
 
 export function CartView() {
@@ -21,15 +20,9 @@ export function CartView() {
   const { isAuthenticated } = useAuth();
   const { lines, notices, dismissNotice, retry, hasStale, isChecking } = useCartSync();
   const saved = useCartStore((s) => s.savedForLater);
-  const couponCode = useCartStore((s) => s.couponCode);
   const { setQuantity, removeItem, saveForLater, moveToCart, removeSaved, acceptPrice, setCoupon, clearCoupon } = useCartStore.getState();
 
-  const payable = useMemo(() => lines.filter(isPayable).map((l) => ({ unitPrice: l.unitPrice, quantity: l.item.quantity })), [lines]);
-  const subtotal = useMemo(() => calculateTotals(payable).subtotal, [payable]);
-  const couponEval = couponCode ? evaluateCoupon(couponCode, subtotal) : null;
-  const activeCoupon = couponEval?.status === "valid" ? couponEval.coupon : null;
-  const couponMessage = couponEval && couponEval.status !== "valid" ? `${couponCode} no longer applies: ${couponEval.message}` : null;
-  const totals = useMemo(() => calculateTotals(payable, activeCoupon), [payable, activeCoupon]);
+  const { subtotal, activeCoupon, couponMessage, totals } = useCartPricing(lines);
   const canCheckout = checkCanCheckout(lines);
 
   function applyCoupon(code) {

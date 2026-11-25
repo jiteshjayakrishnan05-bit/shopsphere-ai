@@ -1,0 +1,430 @@
+[
+  {
+    "id": "SS-20261120-DEMO1",
+    "userId": "demo-customer",
+    "createdAt": "2026-11-22T09:30:00Z",
+    "status": "placed",
+    "timeline": [
+      {
+        "status": "placed",
+        "at": "2026-11-22T09:30:00Z"
+      }
+    ],
+    "items": [
+      {
+        "productId": 1,
+        "title": "Essence Mascara Lash Princess",
+        "thumbnail": "",
+        "price": 839,
+        "quantity": 1,
+        "variant": null
+      },
+      {
+        "productId": 2,
+        "title": "Eyeshadow Palette with Mirror",
+        "thumbnail": "",
+        "price": 1679,
+        "quantity": 1,
+        "variant": null
+      }
+    ],
+    "pricing": {
+      "subtotal": 2518,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 453,
+      "total": 2971
+    },
+    "couponCode": null,
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9876543210"
+    },
+    "address": {
+      "address": "12 Anna Salai",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "pincode": "600002",
+      "country": "India"
+    },
+    "delivery": {
+      "id": "standard",
+      "label": "Standard delivery",
+      "minDays": 3,
+      "maxDays": 5,
+      "cost": 0
+    },
+    "payment": {
+      "method": "card",
+      "label": "Mock card",
+      "status": "paid",
+      "testMode": true
+    },
+    "expectedDelivery": "2026-11-27T00:00:00Z"
+  },
+  {
+    "id": "SS-20261118-DEMO2",
+    "userId": "demo-customer",
+    "createdAt": "2026-11-20T14:05:00Z",
+    "status": "confirmed",
+    "timeline": [
+      {
+        "status": "placed",
+        "at": "2026-11-20T14:05:00Z"
+      },
+      {
+        "status": "confirmed",
+        "at": "2026-11-20T21:05:00Z"
+      }
+    ],
+    "items": [
+      {
+        "productId": 3,
+        "title": "Powder Canister",
+        "thumbnail": "",
+        "price": 1259,
+        "quantity": 2,
+        "variant": null
+      }
+    ],
+    "pricing": {
+      "subtotal": 2518,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 453,
+      "total": 2971
+    },
+    "couponCode": null,
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9876543210"
+    },
+    "address": {
+      "address": "12 Anna Salai",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "pincode": "600002",
+      "country": "India"
+    },
+    "delivery": {
+      "id": "standard",
+      "label": "Standard delivery",
+      "minDays": 3,
+      "maxDays": 5,
+      "cost": 0
+    },
+    "payment": {
+      "method": "upi",
+      "label": "Mock UPI",
+      "status": "paid",
+      "testMode": true
+    },
+    "expectedDelivery": "2026-11-25T00:00:00Z"
+  },
+  {
+    "id": "SS-20261115-DEMO3",
+    "userId": "demo-customer",
+    "createdAt": "2026-11-19T11:45:00Z",
+    "status": "packed",
+    "timeline": [
+      {
+        "status": "placed",
+        "at": "2026-11-19T11:45:00Z"
+      },
+      {
+        "status": "confirmed",
+        "at": "2026-11-19T18:45:00Z"
+      },
+      {
+        "status": "packed",
+        "at": "2026-11-20T01:45:00Z"
+      }
+    ],
+    "items": [
+      {
+        "productId": 6,
+        "title": "Calvin Klein CK One",
+        "thumbnail": "",
+        "price": 4199,
+        "quantity": 1,
+        "variant": null
+      }
+    ],
+    "pricing": {
+      "subtotal": 4199,
+      "discount": 0,
+      "shipping": 199,
+      "tax": 756,
+      "total": 5154
+    },
+    "couponCode": null,
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9876543210"
+    },
+    "address": {
+      "address": "12 Anna Salai",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "pincode": "600002",
+      "country": "India"
+    },
+    "delivery": {
+      "id": "express",
+      "label": "Express delivery",
+      "minDays": 1,
+      "maxDays": 2,
+      "cost": 199
+    },
+    "payment": {
+      "method": "card",
+      "label": "Mock card",
+      "status": "paid",
+      "testMode": true
+    },
+    "expectedDelivery": "2026-11-21T00:00:00Z"
+  },
+  {
+    "id": "SS-20261110-DEMO4",
+    "userId": "demo-customer",
+    "createdAt": "2026-11-15T18:20:00Z",
+    "status": "shipped",
+    "timeline": [
+      {
+        "status": "placed",
+        "at": "2026-11-15T18:20:00Z"
+      },
+      {
+        "status": "confirmed",
+        "at": "2026-11-16T01:20:00Z"
+      },
+      {
+        "status": "packed",
+        "at": "2026-11-16T08:20:00Z"
+      },
+      {
+        "status": "shipped",
+        "at": "2026-11-16T15:20:00Z"
+      }
+    ],
+    "items": [
+      {
+        "productId": 4,
+        "title": "Red Lipstick",
+        "thumbnail": "",
+        "price": 1091,
+        "quantity": 1,
+        "variant": null
+      },
+      {
+        "productId": 5,
+        "title": "Red Nail Polish",
+        "thumbnail": "",
+        "price": 755,
+        "quantity": 2,
+        "variant": null
+      }
+    ],
+    "pricing": {
+      "subtotal": 2601,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 468,
+      "total": 3069
+    },
+    "couponCode": null,
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9876543210"
+    },
+    "address": {
+      "address": "12 Anna Salai",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "pincode": "600002",
+      "country": "India"
+    },
+    "delivery": {
+      "id": "standard",
+      "label": "Standard delivery",
+      "minDays": 3,
+      "maxDays": 5,
+      "cost": 0
+    },
+    "payment": {
+      "method": "cod",
+      "label": "Cash on delivery",
+      "status": "cod_pending",
+      "testMode": true
+    },
+    "expectedDelivery": "2026-11-20T00:00:00Z"
+  },
+  {
+    "id": "SS-20261105-DEMO5",
+    "userId": "demo-customer",
+    "createdAt": "2026-11-08T10:10:00Z",
+    "status": "out_for_delivery",
+    "timeline": [
+      {
+        "status": "placed",
+        "at": "2026-11-08T10:10:00Z"
+      },
+      {
+        "status": "confirmed",
+        "at": "2026-11-08T17:10:00Z"
+      },
+      {
+        "status": "packed",
+        "at": "2026-11-09T00:10:00Z"
+      },
+      {
+        "status": "shipped",
+        "at": "2026-11-09T07:10:00Z"
+      },
+      {
+        "status": "out_for_delivery",
+        "at": "2026-11-09T14:10:00Z"
+      }
+    ],
+    "items": [
+      {
+        "productId": 2,
+        "title": "Eyeshadow Palette with Mirror",
+        "thumbnail": "",
+        "price": 1679,
+        "quantity": 1,
+        "variant": null
+      },
+      {
+        "productId": 3,
+        "title": "Powder Canister",
+        "thumbnail": "",
+        "price": 1259,
+        "quantity": 1,
+        "variant": null
+      }
+    ],
+    "pricing": {
+      "subtotal": 2938,
+      "discount": 0,
+      "shipping": 0,
+      "tax": 529,
+      "total": 3467
+    },
+    "couponCode": null,
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9876543210"
+    },
+    "address": {
+      "address": "12 Anna Salai",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "pincode": "600002",
+      "country": "India"
+    },
+    "delivery": {
+      "id": "economy",
+      "label": "Economy delivery",
+      "minDays": 6,
+      "maxDays": 8,
+      "cost": 0
+    },
+    "payment": {
+      "method": "upi",
+      "label": "Mock UPI",
+      "status": "paid",
+      "testMode": true
+    },
+    "expectedDelivery": "2026-11-16T00:00:00Z"
+  },
+  {
+    "id": "SS-20261101-DEMO6",
+    "userId": "demo-customer",
+    "createdAt": "2026-11-02T16:00:00Z",
+    "status": "delivered",
+    "timeline": [
+      {
+        "status": "placed",
+        "at": "2026-11-02T16:00:00Z"
+      },
+      {
+        "status": "confirmed",
+        "at": "2026-11-02T23:00:00Z"
+      },
+      {
+        "status": "packed",
+        "at": "2026-11-03T06:00:00Z"
+      },
+      {
+        "status": "shipped",
+        "at": "2026-11-03T13:00:00Z"
+      },
+      {
+        "status": "out_for_delivery",
+        "at": "2026-11-03T20:00:00Z"
+      },
+      {
+        "status": "delivered",
+        "at": "2026-11-04T03:00:00Z"
+      }
+    ],
+    "items": [
+      {
+        "productId": 1,
+        "title": "Essence Mascara Lash Princess",
+        "thumbnail": "",
+        "price": 839,
+        "quantity": 2,
+        "variant": null
+      },
+      {
+        "productId": 6,
+        "title": "Calvin Klein CK One",
+        "thumbnail": "",
+        "price": 4199,
+        "quantity": 1,
+        "variant": null
+      }
+    ],
+    "pricing": {
+      "subtotal": 5877,
+      "discount": 0,
+      "shipping": 199,
+      "tax": 1058,
+      "total": 7134
+    },
+    "couponCode": null,
+    "customer": {
+      "name": "Demo Customer",
+      "email": "customer@shopsphere.dev",
+      "phone": "9876543210"
+    },
+    "address": {
+      "address": "12 Anna Salai",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "pincode": "600002",
+      "country": "India"
+    },
+    "delivery": {
+      "id": "express",
+      "label": "Express delivery",
+      "minDays": 1,
+      "maxDays": 2,
+      "cost": 199
+    },
+    "payment": {
+      "method": "card",
+      "label": "Mock card",
+      "status": "paid",
+      "testMode": true
+    },
+    "expectedDelivery": "2026-11-04T00:00:00Z"
+  }
+]

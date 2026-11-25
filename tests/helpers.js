@@ -5,14 +5,16 @@ export function hydrateStores() {
   persistedStores.forEach((s) => s.persist.rehydrate());
 }
 
+import { StrictMode } from "react";
 import { vi } from "vitest";
 import { render } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 /** Render with a fresh TanStack QueryClient (no retries, so failures surface immediately). */
-export function renderWithClient(ui) {
+export function renderWithClient(ui, { strict = false } = {}) {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false, gcTime: 0 } } });
-  return render(<QueryClientProvider client={client}>{ui}</QueryClientProvider>);
+  const tree = <QueryClientProvider client={client}>{ui}</QueryClientProvider>;
+  return render(strict ? <StrictMode>{tree}</StrictMode> : tree);
 }
 
 /** A raw DummyJSON-shaped product. price is USD; the app converts at 84 INR per USD. */

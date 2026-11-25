@@ -30,3 +30,23 @@ export function validateReview({ rating, text }) {
   else if (len > 1000) errors.text = "Keep your review under 1,000 characters.";
   return errors;
 }
+
+/** Validate checkout customer details. Returns field errors (empty when valid). */
+export function validateCustomer({ name, email, phone }) {
+  const errors = {};
+  if (String(name ?? "").trim().length < 2) errors.name = "Enter your full name.";
+  if (!isValidEmail(email)) errors.email = "Enter a valid email address.";
+  if (!isValidPhone(phone)) errors.phone = "Enter a valid 10-digit mobile number.";
+  return errors;
+}
+
+/** Validate a delivery address. Returns field errors (empty when valid). */
+export function validateAddress({ address, city, state, pincode, country }) {
+  const errors = {};
+  if (String(address ?? "").trim().length < 5) errors.address = "Enter your street address.";
+  if (String(city ?? "").trim().length < 2) errors.city = "Enter your city.";
+  if (String(state ?? "").trim().length < 2) errors.state = "Enter your state.";
+  if (!isValidPincode(pincode)) errors.pincode = "Enter a valid 6-digit postal code.";
+  if (String(country ?? "").trim().length < 2) errors.country = "Enter your country.";
+  return errors;
+}

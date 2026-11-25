@@ -3,7 +3,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Globe2, Heart, LayoutDashboard, LogIn, LogOut, ShoppingCart, User, UserPlus } from "lucide-react";
+import { Globe2, Heart, LayoutDashboard, LogIn, LogOut, Package, ShoppingCart, User, UserPlus } from "lucide-react";
 import { APP_NAME } from "@/lib/constants";
 import { formatCategory } from "@/lib/formatters";
 import { useAuth } from "@/hooks/use-auth";
@@ -101,6 +101,9 @@ export function SiteHeader() {
               <>
                 <Link href="/account" className={menuItem}>
                   <User className="h-4 w-4" aria-hidden="true" /> My account
+                </Link>
+                <Link href="/orders" className={menuItem}>
+                  <Package className="h-4 w-4" aria-hidden="true" /> {isAdmin ? "All orders" : "My orders"}
                 </Link>
                 {isAdmin && (
                   <Link href="/admin" className={menuItem}>

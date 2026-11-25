@@ -3,7 +3,7 @@
 Frontend internship project: a production-style e-commerce storefront built with Next.js (App Router), React, Tailwind CSS,
 TanStack Query and Zustand. Data comes from the free DummyJSON API plus documented local fixtures. No backend, no paid services.
 
-> Status: **Phases 1-3 complete** (foundation, auth, discovery, product detail, cart, wishlist, Quick View, Compare). Later phases add the six-step checkout and orders, recommendations, assistant, admin and reviews.
+> Status: **Phases 1-4 complete** (foundation, auth, discovery, product detail, cart, wishlist, Quick View, Compare, six-step checkout, orders and tracking, saved addresses). Later phases add recommendations, assistant, admin, reviews and the full customer dashboard.
 
 ## Stack
 Next.js 16 · React 19 · JavaScript/JSX · Tailwind CSS 4 · TanStack Query 5 · Zustand 5 · Lucide · Vitest · React Testing Library · Playwright
@@ -52,4 +52,12 @@ New accounts created on `/register` are always customers and live in your browse
 - **Demo coupons:** `WELCOME10` (10% up to ₹500), `SAVE200` (₹200 off ₹1,500+), `FREESHIP`, `SUMMER25` (expired, to demonstrate the expired message).
 - **Wishlist** (`/wishlist`): current price and stock, Move to cart, unavailable items kept and flagged. Decision: the wishlist is saved in localStorage for guests and customers alike (the PRD marks it "session-limited" for guests; this simpler behaviour is documented rather than hidden).
 - **Quick View and Compare:** accessible dialog (focus trap, Escape, focus restore); compare 2-4 products on `/compare`.
-- **Checkout route** (`/checkout`) requires a customer sign-in and currently shows a short holding message. The six-step checkout is the next phase.
+
+## Checkout and orders (Phase 4)
+- **Six steps** (`/checkout`, customers only): Customer, Address, Delivery, Summary, Payment, Confirmation. Progress and entered details persist locally, so a refresh or an expired session resumes at the same step after sign-in. Details are cleared if a different customer signs in.
+- **Delivery options (simulated):** Economy (free, 6-8 days), Standard (3-5 days, follows the cart shipping rule), Express (₹199, 1-2 days). The chosen cost replaces the cart's shipping estimate.
+- **Payment is test mode only.** Mock card = pick a test scenario (ending 4242 approves, ending 0002 declines). Mock UPI = a `...@test` handle (`success@test` approves, `fail@test` declines; real-looking handles are rejected). Cash on delivery stays "pending" until the order is marked delivered. No card numbers, CVVs, bank logins or UPI PINs are requested, stored or sent anywhere.
+- **Payment failure** shows the reason and a Retry button on the same step. Nothing is lost, the cart is only cleared after success, and double submits cannot create two orders.
+- **Orders** (`/orders`, `/orders/[id]`): stored locally (`src/data/orders.json` seeds six demo orders for the demo customer, one per tracking stage). Customers see only their own orders; administrators see all. Another customer's order looks identical to a missing one. Tracking is simulated; an administrator can advance an order through the six stages from the order page (the full admin dashboard comes later).
+- **Saved addresses** (`/account/addresses`): add, edit, delete, set default. Checkout can reuse them or save a new one.
+- **Known limitation:** orders and addresses live in this browser's localStorage, so they are per device. That is by design for this frontend-only demo.
