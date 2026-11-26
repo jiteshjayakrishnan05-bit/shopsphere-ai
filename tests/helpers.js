@@ -29,10 +29,14 @@ export const rawProduct = (id, over = {}) => ({
  * Stub fetch for /products/{id}, /products/category/*, /products/categories.
  * `routes[id]` is a raw product, "404", or "network".
  */
-export function stubProductApi(routes, categoryProducts = []) {
+export function stubProductApi(routes, categoryProducts = [], catalogue = null) {
   const fn = vi.fn(async (url) => {
     const u = String(url);
     if (u.includes("/products/categories")) return { ok: true, json: async () => [] };
+    // Full catalogue request (/products?limit=0): served only when a catalogue is provided.
+    if (/\/products\?/.test(u) && !u.includes("/products/")) {
+      return catalogue ? { ok: true, json: async () => ({ products: catalogue, total: catalogue.length, skip: 0, limit: 0 }) } : { ok: false, status: 404 };
+    }
     if (u.includes("/products/category/")) return { ok: true, json: async () => ({ products: categoryProducts, total: categoryProducts.length, skip: 0, limit: 0 }) };
     const m = u.match(/\/products\/(\d+)/);
     const r = m ? routes[m[1]] : undefined;

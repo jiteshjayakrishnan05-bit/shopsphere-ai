@@ -9,7 +9,6 @@ function AccountSummary() {
   const { user, logout } = useAuth();
   const router = useRouter();
   if (!user) return null; // the route guard normally prevents this; stay safe on the first render
-  
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
       <h1 className="text-2xl font-semibold tracking-tight">Your account</h1>
@@ -31,6 +30,9 @@ function AccountSummary() {
         </Link>
         <Link href="/account/addresses" className="font-medium text-brand-600 underline">
           Saved addresses
+        </Link>
+        <Link href="/account/preferences" className="font-medium text-brand-600 underline">
+          Recommendation preferences
         </Link>
       </nav>
       <p className="mt-4 text-sm text-ink-soft">Profile editing and recommendation preferences arrive in later phases.</p>

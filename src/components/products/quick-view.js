@@ -47,7 +47,7 @@ export function QuickView({ product, hasOptions, canAdd, atLimit, onAdd, onClose
                   Choose options
                 </Link>
               ) : (
-                <button type="button" onClick={onAdd} disabled={!canAdd} className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-soft">
+                <button type="button" data-action="add-to-cart" onClick={onAdd} disabled={!canAdd} className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-soft">
                   <ShoppingCart className="h-4 w-4" aria-hidden="true" />
                   {!product.inStock ? "Out of stock" : atLimit ? "Max in cart" : "Add to cart"}
                 </button>

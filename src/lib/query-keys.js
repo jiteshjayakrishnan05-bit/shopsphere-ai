@@ -12,4 +12,5 @@ export const queryKeys = {
     byCategory: (category, params = {}) => ["products", "category", category, params],
   },
   categories: { all: ["categories"] },
+  recommendations: (strategy, seedId, category, limit, fingerprint, size) => ["recommendations", strategy, seedId, category, limit, fingerprint, size],
 };

@@ -15,9 +15,9 @@ const iconBtn = "grid h-9 w-9 place-items-center rounded-full bg-surface/90 shad
 
 /**
  * Product card: wishlist, Quick View, compare and add-to-cart.
- * @param {{product: import("@/services/api/normalize-product").Product, priority?: boolean}} props
+ * @param {{product: import("@/services/api/normalize-product").Product, priority?: boolean, reason?: string|null}} props
  */
-export function ProductCard({ product, priority = false }) {
+export function ProductCard({ product, priority = false, reason = null }) {
   const wishlisted = useWishlistStore((s) => s.ids.includes(product.id));
   const toggleWishlist = useWishlistStore((s) => s.toggle);
   const inCart = useCartStore(selectProductQuantity(product.id));
@@ -89,6 +89,7 @@ export function ProductCard({ product, priority = false }) {
         {product.brand && <p className="text-xs text-ink-soft">{product.brand}</p>}
         <h3 className="mt-0.5 line-clamp-2 text-sm font-medium">{product.title}</h3>
       </Link>
+      {reason && <p className="mt-1 text-xs font-medium text-brand-700">{reason}</p>}
       <div className="mt-2 flex items-baseline gap-2">
         <span className="font-semibold">{formatPrice(product.price)}</span>
         {product.discountPercentage > 0 && <span className="text-xs text-ink-soft line-through">{formatPrice(product.originalPrice)}</span>}
@@ -106,7 +107,7 @@ export function ProductCard({ product, priority = false }) {
           Choose options
         </Link>
       ) : (
-        <button type="button" onClick={handleAdd} disabled={!canAdd} className="mt-3 flex w-full items-center justify-center gap-2 rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-soft">
+        <button type="button" data-action="add-to-cart" onClick={handleAdd} disabled={!canAdd} className="mt-3 flex w-full items-center justify-center gap-2 rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-soft">
           {justAdded ? <Check className="h-4 w-4" aria-hidden="true" /> : <ShoppingCart className="h-4 w-4" aria-hidden="true" />}
           {cartLabel}
         </button>

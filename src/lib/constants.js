@@ -49,4 +49,5 @@ export const STORAGE_KEYS = Object.freeze({
   searchHistory: "shopsphere-search-history",
   orders: "shopsphere-orders",
   addresses: "shopsphere-addresses",
+  recAnalytics: "shopsphere-rec-analytics",
 });

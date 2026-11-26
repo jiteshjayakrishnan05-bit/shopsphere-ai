@@ -10,6 +10,8 @@ import { getVariantConfig } from "@/features/products/variants";
 import { formatCategory, formatPrice } from "@/lib/formatters";
 import { Skeleton } from "@/components/feedback/skeleton";
 import { ErrorState } from "@/components/feedback/error-state";
+import { RecommendationRail } from "@/features/recommendations/recommendation-rail";
+import { STRATEGY } from "@/services/recommendation/recommendation-strategies";
 
 export function WishlistView() {
   const hydrated = useHydrated();
@@ -117,6 +119,7 @@ export function WishlistView() {
           <ErrorState title="Some items couldn't be refreshed" message="Showing the last information we have." />
         </div>
       )}
+      {ids.length > 0 && <RecommendationRail strategy={STRATEGY.wishlist} />}
     </div>
   );
 }
