@@ -1,3 +1,5 @@
+import { matchesColour } from "./variants";
+
 /**
  * Pure catalogue logic: filter, sort, paginate and facet products.
  * The AI assistant (Phase 8) reuses these functions instead of duplicating filtering.
@@ -14,6 +16,12 @@ export function filterProducts(products, f) {
     if (f.stock === "in" && !p.inStock) return false;
     if (f.stock === "out" && p.inStock) return false;
     if (f.onSale && !(p.discountPercentage > 0)) return false;
+    // Used by the shopping assistant: any keyword in the title or tags (e.g. "headphone"), and colour support.
+    if (f.keywords?.length) {
+      const hay = `${p.title} ${(p.tags ?? []).join(" ")}`.toLowerCase();
+      if (!f.keywords.some((k) => hay.includes(k))) return false;
+    }
+    if (f.colour && !matchesColour(p, f.colour)) return false;
     return true;
   });
 }

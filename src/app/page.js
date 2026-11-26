@@ -4,6 +4,7 @@ import { RecommendationRail } from "@/features/recommendations/recommendation-ra
 import { RecentlyViewedRail } from "@/features/recommendations/recently-viewed-rail";
 import { CategoryDiscovery } from "@/features/recommendations/category-discovery";
 import { CategoryNav } from "@/features/recommendations/category-nav";
+import { AssistantEntry } from "@/features/ai-assistant/assistant-entry";
 import { STRATEGY } from "@/services/recommendation/recommendation-strategies";
 import { APP_TAGLINE } from "@/lib/constants";
 
@@ -38,6 +39,7 @@ export default function HomePage() {
       <RecommendationRail strategy={STRATEGY.category} limit={4} />
       <RecommendationRail strategy={STRATEGY.price} limit={4} />
       <CategoryDiscovery />
+      <AssistantEntry />
     </div>
   );
 }
