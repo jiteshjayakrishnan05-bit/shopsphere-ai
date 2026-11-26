@@ -3,7 +3,7 @@
 Frontend internship project: a production-style e-commerce storefront built with Next.js (App Router), React, Tailwind CSS,
 TanStack Query and Zustand. Data comes from the free DummyJSON API plus documented local fixtures. No backend, no paid services.
 
-> Status: **Phases 1-5 complete** (foundation, auth, discovery, product detail, cart, wishlist, Quick View, Compare, six-step checkout, orders and tracking, saved addresses, recommendation engine). Later phases add the shopping assistant, admin dashboard, reviews and the rest of the customer dashboard.
+> Status: **Phases 1-6 complete** (foundation, auth, discovery, product detail, cart, wishlist, Quick View, Compare, six-step checkout, orders and tracking, saved addresses, recommendation engine, shopping assistant). Later phases add the admin dashboard, reviews and the rest of the customer dashboard.
 
 ## Stack
 Next.js 16 · React 19 · JavaScript/JSX · Tailwind CSS 4 · TanStack Query 5 · Zustand 5 · Lucide · Vitest · React Testing Library · Playwright
@@ -84,3 +84,16 @@ Brand affinity and search-history match are blended in at 10% (`final = 0.9 * ba
 **Local analytics:** impressions are counted once per rail when it scrolls into view (never per re-render), plus clicks and add-to-carts, per strategy, in `localStorage` key `shopsphere-rec-analytics`. The administrator dashboard will read these.
 
 **Transparency:** `/account/preferences` shows the price range, preferred categories, and the viewed, wishlist, cart, purchase and search signals, all computed from real state, with a confirmed "Reset personalisation" (clears recently viewed and search history only).
+
+## Shopping assistant (Phase 6)
+**Rule-based, not an LLM.** No paid AI API, no API key, nothing leaves the browser. The panel says so, and the information section shows: "This shopping assistant uses rule-based intent recognition and product filtering. It does not currently use a live large language model."
+
+**Pipeline** (`src/services/assistant/`): message -> `intent-parser.js` (structured intent) -> `conversation-service.js` (merge with remembered context) -> `assistant-service.js` (run the **shared** product filter in `features/products/catalogue-filter.js`, or the **Similar Products** strategy of the recommendation service). The assistant has no filtering code of its own.
+
+**Understands:** categories and synonyms (phones, mobiles, laptops, earbuds, sneakers, perfume and more, see `category-lexicon.js`), price ceilings and floors (`under ₹5,000`, `below 10k`, `less than 30000`, `1.5 lakh`, `between 2000 and 5000`), minimum ratings (`good ratings`, `4 stars and up`), colours, relative refinements and similar-product requests. Example: "Show me headphones under 5000 with good ratings" becomes `{ category: "headphones", maxPrice: 5000, minRating: 4 }`.
+
+**Follow-ups:** "Show me something cheaper" (ceiling drops below the median price of the last results), "Something with better ratings" (minimum steps 4, 4.5, 4.8, keeping category and price), "Only in blue", "Show me more like the second one" (results are numbered), "Never mind, show me headphones instead" (new category, keeps price and rating, drops colour). Naming a new category without "instead" starts a fresh search.
+
+**Honest limits:** DummyJSON has no headphones category, so "headphones" means the mobile-accessories category narrowed by title or tag keywords. Colour filtering works only where product data has colours: the demo variant fixture (sunglasses) or a colour named in the product text. If a colour cannot be applied, the assistant says so instead of ignoring it. Messages it cannot understand get a clarification and three working example prompts, never unrelated products.
+
+**Chat UI:** floating button, panel (full screen on phones), numbered inline product cards with add to cart, starter prompts, typing indicator, clear chat, retry on failure, Escape to close with focus returned to the launcher. The conversation is kept in `sessionStorage` for the tab session and stores product ids only.

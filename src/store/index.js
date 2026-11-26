@@ -9,6 +9,7 @@ import { useSearchHistoryStore } from "./search-history-store";
 import { useOrdersStore } from "./orders-store";
 import { useAddressesStore } from "./addresses-store";
 import { useRecAnalyticsStore } from "./recommendation-analytics-store";
+import { useAssistantStore } from "./assistant-store";
 
 /** Every persisted store, so hydration and cross-tab sync can treat them uniformly. */
 export const persistedStores = [
@@ -23,6 +24,7 @@ export const persistedStores = [
   useOrdersStore,
   useAddressesStore,
   useRecAnalyticsStore,
+  useAssistantStore,
 ];
 
 export {
@@ -37,6 +39,7 @@ export {
   useOrdersStore,
   useAddressesStore,
   useRecAnalyticsStore,
+  useAssistantStore,
 };
 export { selectCartCount, selectProductQuantity, clampQuantity, lineIdOf } from "./cart-store";
 export { ordersForUser } from "./orders-store";

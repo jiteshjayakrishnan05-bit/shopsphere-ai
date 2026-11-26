@@ -3,6 +3,7 @@ import { AppProviders } from "@/providers/app-providers";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { CompareBar } from "@/features/compare/compare-bar";
+import { AssistantWidget } from "@/features/ai-assistant/assistant-widget";
 import { APP_NAME, APP_TAGLINE } from "@/lib/constants";
 
 export const metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
           <main id="main">{children}</main>
           <SiteFooter />
           <CompareBar />
+          <AssistantWidget />
         </AppProviders>
       </body>
     </html>
