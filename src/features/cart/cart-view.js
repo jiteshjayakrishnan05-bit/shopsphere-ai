@@ -7,6 +7,8 @@ import { formatPrice } from "@/lib/formatters";
 import { useAuth } from "@/hooks/use-auth";
 import { useCartStore } from "@/store";
 import { Skeleton } from "@/components/feedback/skeleton";
+import { RecommendationRail } from "@/features/recommendations/recommendation-rail";
+import { STRATEGY } from "@/services/recommendation/recommendation-strategies";
 import { CartLine } from "./cart-line";
 import { OrderSummary } from "./order-summary";
 import { useCartSync } from "./use-cart-sync";
@@ -131,6 +133,7 @@ export function CartView() {
           </ul>
         </section>
       )}
+      {lines.length > 0 && <RecommendationRail strategy={STRATEGY.cart} />}
     </div>
   );
 }

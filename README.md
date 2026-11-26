@@ -3,7 +3,7 @@
 Frontend internship project: a production-style e-commerce storefront built with Next.js (App Router), React, Tailwind CSS,
 TanStack Query and Zustand. Data comes from the free DummyJSON API plus documented local fixtures. No backend, no paid services.
 
-> Status: **Phases 1-4 complete** (foundation, auth, discovery, product detail, cart, wishlist, Quick View, Compare, six-step checkout, orders and tracking, saved addresses). Later phases add recommendations, assistant, admin, reviews and the full customer dashboard.
+> Status: **Phases 1-5 complete** (foundation, auth, discovery, product detail, cart, wishlist, Quick View, Compare, six-step checkout, orders and tracking, saved addresses, recommendation engine). Later phases add the shopping assistant, admin dashboard, reviews and the rest of the customer dashboard.
 
 ## Stack
 Next.js 16 · React 19 · JavaScript/JSX · Tailwind CSS 4 · TanStack Query 5 · Zustand 5 · Lucide · Vitest · React Testing Library · Playwright
@@ -61,3 +61,26 @@ New accounts created on `/register` are always customers and live in your browse
 - **Orders** (`/orders`, `/orders/[id]`): stored locally (`src/data/orders.json` seeds six demo orders for the demo customer, one per tracking stage). Customers see only their own orders; administrators see all. Another customer's order looks identical to a missing one. Tracking is simulated; an administrator can advance an order through the six stages from the order page (the full admin dashboard comes later).
 - **Saved addresses** (`/account/addresses`): add, edit, delete, set default. Checkout can reuse them or save a new one.
 - **Known limitation:** orders and addresses live in this browser's localStorage, so they are per device. That is by design for this frontend-only demo.
+
+## Recommendation engine (Phase 5)
+Rule-based and explainable. It does not use machine learning or an LLM, and says so on the preferences page.
+
+**Architecture** (UI never contains scoring):
+`RecommendationRail` -> `useRecommendations()` -> `recommendation-service` -> `recommendation-provider` -> `recommendation-engine` + `recommendation-scoring` -> DummyJSON catalogue + `src/data/recommendations.json`.
+Another provider (for example a machine-learning one) can replace the mock one with `setRecommendationProvider()` and no UI changes; the contract is documented in `recommendation-provider.js`. The service never throws: a failing provider gives an empty result and the rail simply hides.
+
+**Signals:** recently viewed (most recent first, older items count 15% less each), search history, categories, tags, brands, price range, ratings, wishlist, cart and previous purchases (weighted highest). Unknown or deleted products are ignored; out-of-stock products are never recommended; items already bought, carted or saved are not suggested back.
+
+**Weighted score** (all components 0-1, weights centralised in `recommendation-scoring.js`):
+`score = 0.22 categoryMatch + 0.16 priceSimilarity + 0.16 tagOverlap + 0.10 normalizedRating + 0.12 recentlyViewedRelation + 0.12 wishlistRelation + 0.12 cartRelation`.
+Brand affinity and search-history match are blended in at 10% (`final = 0.9 * base + 0.1 * modifiers`), so the result stays between 0 and 1.
+
+**Nine strategies:** 1 Because you viewed, 2 Similar products, 3 Popular in your category, 4 Within your price range, 5 Based on your wishlist, 6 Complete your order (cart), 7 Frequently bought together, 8 Trending, 9 Recommended for you. With fewer than 2 products of activity, "Recommended for you" falls back to popular products and says so.
+
+**Mock data (documented, not real sales):** `recommendations.json` holds category associations for "bought together" and category momentum for trending. Per-product popularity and rating velocity are derived deterministically from the product id, so results are stable and never random.
+
+**Where rails appear:** home page (trending, personalised, recently viewed, because-you-viewed, category, price), product page (similar, frequently bought together, personalised), cart (complete your order), wishlist (based on your wishlist).
+
+**Local analytics:** impressions are counted once per rail when it scrolls into view (never per re-render), plus clicks and add-to-carts, per strategy, in `localStorage` key `shopsphere-rec-analytics`. The administrator dashboard will read these.
+
+**Transparency:** `/account/preferences` shows the price range, preferred categories, and the viewed, wishlist, cart, purchase and search signals, all computed from real state, with a confirmed "Reset personalisation" (clears recently viewed and search history only).

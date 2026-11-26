@@ -1,0 +1,33 @@
+{
+  "_comment": "DEMO FIXTURE (mock data, not real sales). categoryMomentum boosts the mock trending popularity of some categories. associations are mock 'frequently bought together' strengths between DummyJSON categories (0-1), used by the Frequently Bought Together, cart and wishlist strategies. Per-product popularity and rating velocity are derived deterministically from the product id (see mockSignals in recommendation-scoring.js), so results are stable, never random.",
+  "categoryMomentum": {
+    "smartphones": 1.15, "laptops": 1.1, "mobile-accessories": 1.1, "womens-dresses": 1.05,
+    "fragrances": 1.05, "sunglasses": 1.0, "groceries": 0.9, "vehicle": 0.85, "motorcycle": 0.85
+  },
+  "associations": {
+    "laptops": { "mobile-accessories": 0.9, "tablets": 0.5 },
+    "smartphones": { "mobile-accessories": 0.95, "tablets": 0.4 },
+    "tablets": { "mobile-accessories": 0.85, "laptops": 0.4 },
+    "mobile-accessories": { "smartphones": 0.6, "laptops": 0.5, "tablets": 0.5 },
+    "mens-shirts": { "mens-shoes": 0.8, "mens-watches": 0.7, "sunglasses": 0.5 },
+    "mens-shoes": { "mens-shirts": 0.7, "sports-accessories": 0.6, "mens-watches": 0.4 },
+    "mens-watches": { "sunglasses": 0.7, "mens-shirts": 0.6, "mens-shoes": 0.4 },
+    "womens-dresses": { "womens-shoes": 0.85, "womens-bags": 0.85, "womens-jewellery": 0.8, "womens-watches": 0.5 },
+    "tops": { "womens-bags": 0.7, "womens-jewellery": 0.7, "womens-shoes": 0.6 },
+    "womens-shoes": { "womens-bags": 0.8, "womens-dresses": 0.7, "tops": 0.5 },
+    "womens-bags": { "womens-shoes": 0.7, "womens-jewellery": 0.7, "womens-dresses": 0.6 },
+    "womens-jewellery": { "womens-watches": 0.7, "womens-dresses": 0.6, "womens-bags": 0.6 },
+    "womens-watches": { "womens-jewellery": 0.7, "womens-bags": 0.5 },
+    "sunglasses": { "mens-watches": 0.6, "womens-bags": 0.4 },
+    "beauty": { "skin-care": 0.85, "fragrances": 0.7 },
+    "skin-care": { "beauty": 0.85, "fragrances": 0.5 },
+    "fragrances": { "beauty": 0.7, "skin-care": 0.5 },
+    "furniture": { "home-decoration": 0.9, "kitchen-accessories": 0.4 },
+    "home-decoration": { "furniture": 0.8, "kitchen-accessories": 0.6 },
+    "kitchen-accessories": { "groceries": 0.7, "home-decoration": 0.5 },
+    "groceries": { "kitchen-accessories": 0.6 },
+    "sports-accessories": { "mens-shoes": 0.5 },
+    "motorcycle": { "vehicle": 0.5, "sports-accessories": 0.3 },
+    "vehicle": { "motorcycle": 0.5 }
+  }
+}

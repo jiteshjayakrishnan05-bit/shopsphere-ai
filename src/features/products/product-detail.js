@@ -16,7 +16,8 @@ import { QuantitySelector } from "@/components/common/quantity-selector";
 import { ImageGallery } from "./image-gallery";
 import { DeliveryEstimate } from "./delivery-estimate";
 import { ProductReviewsPreview } from "./product-reviews-preview";
-import { RelatedProducts } from "./related-products";
+import { RecommendationRail } from "@/features/recommendations/recommendation-rail";
+import { STRATEGY } from "@/services/recommendation/recommendation-strategies";
 import { buildSpecifications } from "./specs";
 import { firstAvailableVariant, getVariantConfig } from "./variants";
 import { cn } from "@/lib/utils";
@@ -208,7 +209,9 @@ function ProductDetailContent({ product }) {
         <ProductReviewsPreview reviews={reviews} rating={product.rating} />
       </div>
 
-      <RelatedProducts product={product} />
+      <RecommendationRail strategy={STRATEGY.similar} seed={product} />
+      <RecommendationRail strategy={STRATEGY.frequentlyBoughtTogether} seed={product} />
+      <RecommendationRail strategy={STRATEGY.personalized} />
     </div>
   );
 }
