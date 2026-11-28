@@ -31,6 +31,9 @@ function AccountSummary() {
         <Link href="/account/addresses" className="font-medium text-brand-600 underline">
           Saved addresses
         </Link>
+        <Link href="/account/reviews" className="font-medium text-brand-600 underline">
+          Your reviews
+        </Link>
         <Link href="/account/preferences" className="font-medium text-brand-600 underline">
           Recommendation preferences
         </Link>

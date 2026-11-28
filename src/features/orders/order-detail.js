@@ -10,7 +10,7 @@ import { StatusBadge } from "./status-badge";
 import { nextStatus, statusLabel } from "./order-lifecycle";
 import { PriceBreakdown } from "@/features/checkout/checkout-steps";
 
-export function OrderDetail({ id }) {
+export function OrderDetail({ id, backHref = "/orders", backLabel = "← All orders" }) {
   const { user, isAdmin } = useAuth();
   const orders = useOrdersStore((s) => s.orders);
   const advance = useOrdersStore((s) => s.advance);
@@ -22,8 +22,8 @@ export function OrderDetail({ id }) {
       <div className="mx-auto max-w-md px-4 py-20 text-center">
         <SearchX className="mx-auto h-10 w-10 text-ink-soft" aria-hidden="true" />
         <h1 className="mt-3 text-xl font-semibold">We couldn&apos;t find that order</h1>
-        <Link href="/orders" className="mt-4 inline-block text-sm font-medium text-brand-600 underline">
-          Back to your orders
+        <Link href={backHref} className="mt-4 inline-block text-sm font-medium text-brand-600 underline">
+          Back to orders
         </Link>
       </div>
     );
@@ -33,8 +33,8 @@ export function OrderDetail({ id }) {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-      <Link href="/orders" className="text-sm text-brand-600 underline">
-        ← All orders
+      <Link href={backHref} className="text-sm text-brand-600 underline">
+        {backLabel}
       </Link>
       <div className="mt-2 flex flex-wrap items-center gap-3">
         <h1 className="text-2xl font-semibold tracking-tight">Order {order.id}</h1>

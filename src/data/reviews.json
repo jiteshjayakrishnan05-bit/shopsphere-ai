@@ -1,0 +1,24 @@
+{
+  "_comment": "DEMO FIXTURE. Seed reviews for a few products, written for this project (not real customers). 'Verified purchase' is never stored on a review: it is derived at display time from the viewer's local order history, plus the mock purchaseRecords below for seed reviewers who have no orders in this browser.",
+  "purchaseRecords": [
+    { "userId": "seed-u1", "productId": 2 },
+    { "userId": "seed-u2", "productId": 3 },
+    { "userId": "seed-u4", "productId": 1 }
+  ],
+  "reviews": [
+    { "id": "seed-r01", "productId": 1, "userId": "demo-customer", "authorName": "Demo Customer", "rating": 5, "text": "Goes on smoothly and the volume is great. I have reordered twice already.", "createdAt": "2026-11-03T10:15:00.000Z", "helpful": 6, "notHelpful": 0 },
+    { "id": "seed-r02", "productId": 1, "userId": "seed-u4", "authorName": "Meera K.", "rating": 4, "text": "Good product for the price. The brush is a little stiff at first but it softens after a few uses.", "createdAt": "2026-10-21T08:40:00.000Z", "helpful": 3, "notHelpful": 1 },
+    { "id": "seed-r03", "productId": 1, "userId": "seed-u3", "authorName": "Arun P.", "rating": 2, "text": "Arrived with a dry formula and clumped within a week. Not what I expected from the photos.", "createdAt": "2026-10-02T17:05:00.000Z", "helpful": 2, "notHelpful": 4 },
+    { "id": "seed-r04", "productId": 2, "userId": "seed-u1", "authorName": "Priya S.", "rating": 5, "text": "The colours are rich and blend really well. The mirror in the lid is a nice touch for travel.", "createdAt": "2026-11-10T12:00:00.000Z", "helpful": 9, "notHelpful": 0 },
+    { "id": "seed-r05", "productId": 2, "userId": "seed-u5", "authorName": "Nisha R.", "rating": 3, "text": "Pretty shades but some of them have a lot of fallout. Okay for everyday use.", "createdAt": "2026-10-28T09:30:00.000Z", "helpful": 1, "notHelpful": 0 },
+    { "id": "seed-r06", "productId": 3, "userId": "seed-u2", "authorName": "Karthik V.", "rating": 4, "text": "Light powder that sets makeup nicely without looking cakey. The canister is sturdy.", "createdAt": "2026-11-05T14:20:00.000Z", "helpful": 4, "notHelpful": 0 },
+    { "id": "seed-r07", "productId": 3, "userId": "demo-customer", "authorName": "Demo Customer", "rating": 4, "text": "Lasts most of the day. I would like a slightly larger size but the quality is good.", "createdAt": "2026-11-12T19:10:00.000Z", "helpful": 2, "notHelpful": 0 },
+    { "id": "seed-r08", "productId": 4, "userId": "seed-u3", "authorName": "Arun P.", "rating": 5, "text": "Exactly the shade shown. Creamy and comfortable, and it does not dry out my lips.", "createdAt": "2026-09-30T11:00:00.000Z", "helpful": 5, "notHelpful": 0 },
+    { "id": "seed-r09", "productId": 4, "userId": "seed-u5", "authorName": "Nisha R.", "rating": 4, "text": "Great colour payoff. It fades after a few hours of eating and drinking, so I carry it for touch-ups.", "createdAt": "2026-10-14T16:45:00.000Z", "helpful": 1, "notHelpful": 0 },
+    { "id": "seed-r10", "productId": 5, "userId": "seed-u1", "authorName": "Priya S.", "rating": 3, "text": "Nice glossy finish, but it chipped on day three. Fine for a special occasion.", "createdAt": "2026-10-09T07:55:00.000Z", "helpful": 0, "notHelpful": 2 },
+    { "id": "seed-r11", "productId": 6, "userId": "demo-customer", "authorName": "Demo Customer", "rating": 5, "text": "A classic fresh scent that people keep complimenting. It lasts a full workday.", "createdAt": "2026-11-14T13:25:00.000Z", "helpful": 7, "notHelpful": 0 },
+    { "id": "seed-r12", "productId": 6, "userId": "seed-u2", "authorName": "Karthik V.", "rating": 4, "text": "Light and clean. I wish it lasted a little longer, but it is great for summer.", "createdAt": "2026-10-18T10:10:00.000Z", "helpful": 2, "notHelpful": 1 },
+    { "id": "seed-r13", "productId": 7, "userId": "seed-u4", "authorName": "Meera K.", "rating": 5, "text": "Strong, long-lasting fragrance and the bottle looks lovely on the shelf.", "createdAt": "2026-11-08T09:00:00.000Z", "helpful": 3, "notHelpful": 0 },
+    { "id": "seed-r14", "productId": 7, "userId": "seed-u3", "authorName": "Arun P.", "rating": 1, "text": "The cap did not close properly and some of it had leaked by the time it arrived.", "createdAt": "2026-10-25T15:30:00.000Z", "helpful": 4, "notHelpful": 0 }
+  ]
+}
