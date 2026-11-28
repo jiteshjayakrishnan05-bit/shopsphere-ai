@@ -1,0 +1,15 @@
+{
+  "_comment": "DEMO SEED for the administrator analytics screens. These numbers are simulated. The dashboard shows them together with the real activity recorded in this browser, and the 'Include demo seed data' switch removes them.",
+  "seedVisitors": 1240,
+  "seedStrategyStats": {
+    "personalized": { "impressions": 540, "clicks": 83, "addToCarts": 21 },
+    "trending": { "impressions": 612, "clicks": 74, "addToCarts": 15 },
+    "similar": { "impressions": 388, "clicks": 61, "addToCarts": 17 },
+    "frequentlyBoughtTogether": { "impressions": 301, "clicks": 52, "addToCarts": 24 },
+    "cart": { "impressions": 214, "clicks": 38, "addToCarts": 19 },
+    "wishlist": { "impressions": 96, "clicks": 14, "addToCarts": 5 },
+    "becauseViewed": { "impressions": 262, "clicks": 41, "addToCarts": 9 },
+    "category": { "impressions": 175, "clicks": 22, "addToCarts": 4 },
+    "price": { "impressions": 143, "clicks": 17, "addToCarts": 3 }
+  }
+}

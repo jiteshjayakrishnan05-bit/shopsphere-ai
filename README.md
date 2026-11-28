@@ -3,7 +3,7 @@
 Frontend internship project: a production-style e-commerce storefront built with Next.js (App Router), React, Tailwind CSS,
 TanStack Query and Zustand. Data comes from the free DummyJSON API plus documented local fixtures. No backend, no paid services.
 
-> Status: **Phases 1-6 complete** (foundation, auth, discovery, product detail, cart, wishlist, Quick View, Compare, six-step checkout, orders and tracking, saved addresses, recommendation engine, shopping assistant). Later phases add the admin dashboard, reviews and the rest of the customer dashboard.
+> Status: **Phases 1-7 complete** (foundation, auth, discovery, product detail, cart, wishlist, Quick View, Compare, six-step checkout, orders and tracking, saved addresses, recommendation engine, shopping assistant, administrator dashboard, reviews). Remaining: end-to-end tests, accessibility and performance polish, and final documentation.
 
 ## Stack
 Next.js 16 · React 19 · JavaScript/JSX · Tailwind CSS 4 · TanStack Query 5 · Zustand 5 · Lucide · Vitest · React Testing Library · Playwright
@@ -97,3 +97,22 @@ Brand affinity and search-history match are blended in at 10% (`final = 0.9 * ba
 **Honest limits:** DummyJSON has no headphones category, so "headphones" means the mobile-accessories category narrowed by title or tag keywords. Colour filtering works only where product data has colours: the demo variant fixture (sunglasses) or a colour named in the product text. If a colour cannot be applied, the assistant says so instead of ignoring it. Messages it cannot understand get a clarification and three working example prompts, never unrelated products.
 
 **Chat UI:** floating button, panel (full screen on phones), numbered inline product cards with add to cart, starter prompts, typing indicator, clear chat, retry on failure, Escape to close with focus returned to the launcher. The conversation is kept in `sessionStorage` for the tab session and stores product ids only.
+
+## Administrator dashboard (Phase 7)
+Sign in as `admin@shopsphere.dev`. Everything under `/admin` is administrator-only (a client-side UI guard for this frontend-only demo, not server security). Every admin screen says that changes are **saved locally in this demo**; nothing reaches a real database.
+
+- **Overview:** totals for products, orders and customers; revenue and conversion rate (labelled *Simulated*: demo orders and a seeded visitor count); top-performing products; low-stock alerts (stock of 5 or less); recent order activity; recommendation click-through summary.
+- **Products:** search, category, stock (in / low / out) and status filters; inline stock updates; add product; edit (price, discount, stock, title, description, brand); archive and restore; delete. A product that any order references **cannot be deleted** (the screen explains why and offers to archive it), so order history never breaks. Imported DummyJSON products keep their category; products you create can use any category. Product images are not part of this demo.
+- **Categories:** add, rename and remove categories you created; built-in categories are read-only; a category with products cannot be removed.
+- **Orders:** search by order id, name or email; status, customer and date filters; open an order; advance it one stage at a time through the six-stage lifecycle (cash on delivery is marked paid on delivery).
+- **Reviews:** moderation list; remove reviews.
+- **Analytics:** recommendation impressions, clicks, click-through rate, add-to-cart conversion and per-strategy performance with a chart, labelled **Local Analytics**. A switch adds or removes the demo seed data (`src/data/analytics.json`).
+
+**How local changes reach customers:** edits are stored in `src/store/admin-products-store.js` and layered over the DummyJSON data inside the API service (`services/api/admin-overlay.js`), so catalogue, search, product pages, carts, wishlists and recommendations all see them. A price change makes customers confirm the new price in their cart; an archived or deleted product becomes "no longer available" (kept visible in carts with a Remove action). Completing a checkout reduces stock locally.
+
+## Reviews (Phase 7)
+- Star rating (1-5) plus text of 10 to 1,000 characters, validated; one review per customer per product, which the customer can edit or delete (also from **Account, Your reviews**). Only signed-in customers can post; administrators moderate.
+- Sorting: most recent, highest rated, lowest rated, most helpful. Helpful / not helpful votes, one per voter, can be switched or withdrawn.
+- **Verified purchase** is never stored: it is derived at display time from the viewer's local order history (plus mock purchase records for seed reviewers in `src/data/reviews.json`), so not every review is verified.
+- Rating distribution chart (5 to 1 stars) is computed from all reviews shown. DummyJSON's own reviews appear read-only next to customer reviews. Review text is rendered as plain text, never HTML.
+- Demo reviews in `src/data/reviews.json` were written for this project and are not from real customers.

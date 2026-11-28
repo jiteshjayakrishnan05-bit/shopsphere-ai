@@ -15,7 +15,8 @@ import { ErrorState } from "@/components/feedback/error-state";
 import { QuantitySelector } from "@/components/common/quantity-selector";
 import { ImageGallery } from "./image-gallery";
 import { DeliveryEstimate } from "./delivery-estimate";
-import { ProductReviewsPreview } from "./product-reviews-preview";
+import { ProductReviews } from "@/features/reviews/product-reviews";
+import { useProductReviews } from "@/features/reviews/use-product-reviews";
 import { RecommendationRail } from "@/features/recommendations/recommendation-rail";
 import { STRATEGY } from "@/services/recommendation/recommendation-strategies";
 import { buildSpecifications } from "./specs";
@@ -89,7 +90,7 @@ function ProductDetailContent({ product }) {
   const canAdd = product.inStock && variantOk && remaining > 0;
   const qty = Math.min(quantity, Math.max(1, remaining));
   const specs = useMemo(() => buildSpecifications(product), [product]);
-  const reviews = product.raw?.reviews ?? [];
+  const { all: allReviews } = useProductReviews(product);
 
   function add() {
     addItem(product, qty, variant);
@@ -128,7 +129,7 @@ function ProductDetailContent({ product }) {
             <Star className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden="true" />
             <span className="font-medium text-ink">{product.rating.toFixed(1)}</span>
             <span className="sr-only">out of 5 stars,</span>
-            <span>({reviews.length} {reviews.length === 1 ? "review" : "reviews"})</span>
+            <span>({allReviews.length} {allReviews.length === 1 ? "review" : "reviews"})</span>
           </p>
 
           <div className="mt-4 flex flex-wrap items-baseline gap-3">
@@ -206,7 +207,7 @@ function ProductDetailContent({ product }) {
       )}
 
       <div className="mt-10 max-w-3xl">
-        <ProductReviewsPreview reviews={reviews} rating={product.rating} />
+        <ProductReviews product={product} />
       </div>
 
       <RecommendationRail strategy={STRATEGY.similar} seed={product} />

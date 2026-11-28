@@ -2,9 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useQueryClient } from "@tanstack/react-query";
 import { Check } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
-import { useCartStore, useCheckoutStore, useOrdersStore } from "@/store";
+import { queryKeys } from "@/lib/query-keys";
+import { useAdminProductsStore, useCartStore, useCheckoutStore, useOrdersStore } from "@/store";
 import { Skeleton } from "@/components/feedback/skeleton";
 import { useCartSync } from "@/features/cart/use-cart-sync";
 import { useCartPricing } from "@/features/cart/use-cart-pricing";
@@ -50,6 +52,7 @@ function Stepper({ step, onJump }) {
 /** Six-step simulated checkout. Progress persists locally, so a refresh or an expired session resumes where you left off. */
 export function CheckoutFlow() {
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const { lines, isChecking } = useCartSync();
   const pricing = useCartPricing(lines);
   const step = useCheckoutStore((s) => s.step);
@@ -154,6 +157,11 @@ export function CheckoutFlow() {
       payment: { method, label: methodMeta.label, status: result.status },
     });
     addOrder(order);
+    // A completed order reduces stock (saved locally), so inventory and low-stock alerts stay truthful.
+    useAdminProductsStore.getState().commitOrderStock(
+      pricing.payableLines.map((l) => ({ productId: l.item.productId, quantity: l.item.quantity, stock: l.live.product?.stock ?? l.item.snapshot.stock })),
+    );
+    queryClient.invalidateQueries({ queryKey: queryKeys.products.all });
     useCartStore.getState().clear();
     updateData({ orderId: order.id });
     setStep(5);

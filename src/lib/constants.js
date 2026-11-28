@@ -51,4 +51,6 @@ export const STORAGE_KEYS = Object.freeze({
   addresses: "shopsphere-addresses",
   recAnalytics: "shopsphere-rec-analytics",
   assistant: "shopsphere-assistant",
+  adminProducts: "shopsphere-admin-products",
+  reviews: "shopsphere-reviews",
 });

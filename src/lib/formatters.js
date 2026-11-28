@@ -65,3 +65,6 @@ export const formatDateTime = (iso) =>
 /** "Thu, 27 Nov" */
 export const formatShortDate = (d) =>
   new Intl.DateTimeFormat("en-IN", { weekday: "short", day: "numeric", month: "short" }).format(d instanceof Date ? d : new Date(d));
+
+/** "3 Nov 2026" */
+export const formatDay = (iso) => (iso ? new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric" }).format(new Date(iso)) : "");

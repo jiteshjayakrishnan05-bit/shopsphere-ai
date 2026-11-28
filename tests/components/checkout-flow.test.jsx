@@ -2,7 +2,7 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { cartItem, hydrateStores, rawProduct, renderWithClient, stubProductApi } from "../helpers";
-import { useAddressesStore, useAuthStore, useCartStore, useCheckoutStore, useOrdersStore } from "@/store";
+import { useAddressesStore, useAdminProductsStore, useAuthStore, useCartStore, useCheckoutStore, useOrdersStore } from "@/store";
 
 vi.mock("next/image", () => ({ default: ({ fill, priority, ...p }) => <img {...p} /> }));
 // Keep the real payment rules but skip the artificial processing delay.
@@ -129,6 +129,19 @@ describe("CheckoutFlow", () => {
     await userEvent.click(screen.getByRole("button", { name: "Retry payment" }));
     expect(await screen.findByTestId("order-id")).toBeInTheDocument();
     expect(useOrdersStore.getState().orders).toHaveLength(1); // exactly one order
+  });
+
+  it("reduces stock when an order completes, and not when payment fails", async () => {
+    seed({ step: 4, data: filled }); // 2 units of product 1, live stock 10
+    renderWithClient(<CheckoutFlow />);
+    await userEvent.click(await screen.findByRole("radio", { name: /ending 0002/ }));
+    await userEvent.click(screen.getByRole("button", { name: /Pay .* \(test\)/ }));
+    await screen.findByRole("alert");
+    expect(useAdminProductsStore.getState().edits[1]).toBeUndefined(); // a failed payment changes nothing
+    await userEvent.click(screen.getByRole("radio", { name: /ending 4242/ }));
+    await userEvent.click(screen.getByRole("button", { name: "Retry payment" }));
+    await screen.findByTestId("order-id");
+    expect(useAdminProductsStore.getState().edits[1].stock).toBe(8);
   });
 
   it("validates the test UPI handle and never accepts real-looking ones", async () => {

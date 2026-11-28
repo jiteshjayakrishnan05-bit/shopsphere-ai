@@ -5,3 +5,12 @@ import { webcrypto } from "node:crypto";
 if (!globalThis.crypto?.subtle) {
   Object.defineProperty(globalThis, "crypto", { value: webcrypto, configurable: true });
 }
+
+// Every test starts from a clean admin catalogue and an empty review list (module state would otherwise leak between tests).
+import { beforeEach } from "vitest";
+import { initialAdminState, useAdminProductsStore } from "@/store/admin-products-store";
+import { useReviewsStore } from "@/store/reviews-store";
+beforeEach(() => {
+  useAdminProductsStore.setState(initialAdminState());
+  useReviewsStore.setState({ reviews: [], votes: {} });
+});
